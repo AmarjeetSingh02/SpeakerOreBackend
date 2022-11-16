@@ -3,6 +3,7 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 module.exports.login = (req, res) => {
+  console.log("find data")
   User.findOne({
     where: {
       email: req.body.email,
@@ -13,7 +14,7 @@ module.exports.login = (req, res) => {
       const payload = {
         id: req.body.email,
       };
-      const token = jwt.sign(payload, "THISISKEY", { expiresIn: "1h" });
+      const token = jwt.sign(payload, "THISISKEY", { expiresIn: "1hr" });
       if (userData) {
         userData.subscribed = userData.subscribed ? "true" : "false";
         return res.status(200).json({
